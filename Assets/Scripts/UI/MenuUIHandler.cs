@@ -17,7 +17,7 @@ public class MenuUIHandler : MonoBehaviour
     private void Awake()
     {
         UIManager.Instance.LoadHighScore();
-        scoreText.text = "HigherScore : " + UIManager.Instance.playerName + UIManager.Instance.highScore;
+        scoreText.text = $"HigherScore : {UIManager.Instance.playerName}   {UIManager.Instance.highScore}";
     }
 
     public void StartGame()
