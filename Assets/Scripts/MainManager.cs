@@ -16,7 +16,7 @@ public class MainManager : MonoBehaviour
     
     private bool m_Started = false;
     private int m_Points;
-    
+    private string currentPlayer;
     private bool m_GameOver = false;
 
     
@@ -25,8 +25,9 @@ public class MainManager : MonoBehaviour
     {
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
-        UIManager.Instance.LoadHighScore();
+        currentPlayer = UIManager.Instance.playerName;
         
+        UIManager.Instance.LoadHighScore();
         UpdateHighScoreText();
 
         int[] pointCountArray = new [] {1,1,2,2,5,5};
@@ -75,11 +76,13 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
-        //if score really higher need to implement 
-        //playername problem
-        UIManager.Instance.highScore = m_Points;
-        UpdateHighScoreText();
-        UIManager.Instance.SaveHighScore();
+        if(m_Points > UIManager.Instance.highScore)
+        {
+            UIManager.Instance.playerName = currentPlayer;
+            UIManager.Instance.highScore = m_Points;
+            UpdateHighScoreText();
+            UIManager.Instance.SaveHighScore();
+        } 
         GameOverText.SetActive(true);
     }
 

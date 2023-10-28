@@ -22,7 +22,12 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartGame()
     {
-        UIManager.Instance.playerName = nameInput.text;
+        //optimisation
+        /*if (nameInput.text != null || nameInput.text != "")
+        {UIManager.Instance.playerName = nameInput.text; }
+        else { UIManager.Instance.playerName = "Stupid"; }*/
+        UIManager.Instance.playerName = (nameInput != null && !string.IsNullOrEmpty(nameInput.text)) ? nameInput.text : "Stupid";
+
         SceneManager.LoadScene(1);
     }
 
